@@ -1,9 +1,67 @@
-.gameSetting{
-    margin-top: 100px;
+.gameSetting {
+  margin-top: 100px;
 }
 
 .button {
-    height: 80px;
-    width: 80px;
-    
+  height: 80px;
+  width: 80px;
+}
+
+#box1 {
+  border-left: 0;
+  border-top: 0;
+}
+#box2 {
+  border-top: 0;
+}
+#box3 {
+  border-top: 0;
+  border-right: 0;
+}
+#box4 {
+  border-left: 0;
+}
+#box6 {
+  border-right: 0;
+}
+#box7 {
+  border-left: 0;
+  border-bottom: 0;
+}
+#box8 {
+  border-bottom: 0;
+}
+#box9 {
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.container {
+  width: 330px;
+  margin: 50px auto 0 auto;
+  display: grid;
+}
+
+.container span {
+  display: block;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.container .box {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #000;
+  font-size: 85px;
+  text-align: center;
+  line-height: 100px;
+}
+
+.btn {
+ 
+  font-weight: bold;
+  font-size: 15px;
+  margin: 40px auto;
 }
