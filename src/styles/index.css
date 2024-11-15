@@ -1,12 +1,9 @@
+.gameSetting{
+    margin-top: 100px;
+}
 
-/* 
-
-    You can write your own styles here...
+.button {
+    height: 80px;
+    width: 80px;
     
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
-
-*/
+}
