@@ -2,22 +2,55 @@ import React from "react";
 
 const Tablero = ({ board, setBoard, symbolPlayer, setSymbolPlayer }) => {
   const change = (index, board, symbolPlayer) => {
-    console.log("Cambiando valor: ", index);
-    console.log(board);
+    // console.log("Cambiando valor: ", index);
+    // console.log(board);
     if (board[index] !== null) return;
     const newBoard = [...board];
     newBoard[index] = symbolPlayer;
     setBoard(newBoard);
-    setSymbolPlayer(symbolPlayer === "X" ? "O" : "X");
+
+    const gameWinner = whoWins(newBoard);
+    if (gameWinner) {
+      setWinner(gameWinner);
+    } else {
+      setSymbolPlayer(symbolPlayer === "X" ? "O" : "X");
+    }
   };
+   
+    const whoWins = (newBoard) => {
+     
+      const combinations = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+      ];
+      for (let comb of combinations) {
+        const [a, b, c] = comb;
+        if (newBoard[a] && newBoard[b] === newBoard[c]) {
+          return newBoard[a];
+        }
+      }
+      return null;
+    };
+  
   return (
     <div className="container bg-primary-subtle" id="main">
       <div className="row text-center">
         <span id="turn">Tic Tac Toe in React.js</span>
+
       </div>
       <div className="row justify-content-center align-items-center">
         <div className="col-3 text-center">
-          <button type="button" className="btn btn-success" id="replay">
+          <button type="button" className="btn btn-success" id="replay" onClick={() => {
+            setBoard([null, null, null, null, null, null, null, null, null]);
+            setWinner(null);
+            setSymbolPlayer("X");
+          }}>
             Play again
           </button>
         </div>

@@ -4,20 +4,21 @@ import Tablero from "./Tablero.jsx";
 
 //create your first component
 const Home = () => {
-  const [player1, setPlayer1] = useState("Pedro");
-  const [player2, setPlayer2] = useState("Martin");
-  const [symbolPlayer, setSymbolPlayer] = useState("X");
+  const [player1, setPlayer1] = useState("");
+  const [player2, setPlayer2] = useState("");
+  const [symbolPlayer, setSymbolPlayer] = useState("");
   const [board, setBoard] = useState([
     null,
-    "0",
     null,
     null,
     null,
     null,
-    "X",
     null,
-    "0",
+    null,
+    null,
+    null,
   ]);
+  const [winner, setWinner] = useState(null);
 
   return (
     <>
@@ -27,6 +28,8 @@ const Home = () => {
           setBoard={setBoard}
           symbolPlayer={symbolPlayer}
           setSymbolPlayer={setSymbolPlayer}
+          winner={winner}
+          setWinner={setWinner}
         />
       ) : (
         <ElegirJugador
