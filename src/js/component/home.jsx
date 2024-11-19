@@ -23,14 +23,18 @@ const Home = () => {
   return (
     <>
       {player1 !== "" && player2 !== "" && symbolPlayer !== "" ? (
-        <Tablero
-          board={board}
-          setBoard={setBoard}
-          symbolPlayer={symbolPlayer}
-          setSymbolPlayer={setSymbolPlayer}
-          winner={winner}
-          setWinner={setWinner}
-        />
+        <>
+          <Tablero
+            board={board}
+            setBoard={setBoard}
+            symbolPlayer={symbolPlayer}
+            setSymbolPlayer={setSymbolPlayer}
+            winner={winner}
+            setWinner={setWinner}
+            player1={player1}
+            player2={player2}
+          />
+        </>
       ) : (
         <ElegirJugador
           setPlayer1={setPlayer1}

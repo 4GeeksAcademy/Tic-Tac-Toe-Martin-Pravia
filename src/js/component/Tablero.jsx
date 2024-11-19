@@ -1,56 +1,88 @@
 import React from "react";
 
-const Tablero = ({ board, setBoard, symbolPlayer, setSymbolPlayer }) => {
+const Tablero = ({
+  board,
+  setBoard,
+  symbolPlayer,
+  setSymbolPlayer,
+  setWinner,
+  winner,
+  player1,
+  player2,
+}) => {
   const change = (index, board, symbolPlayer) => {
     // console.log("Cambiando valor: ", index);
     // console.log(board);
-    if (board[index] !== null) return;
+    if (board[index] !== null || winner) return;
     const newBoard = [...board];
     newBoard[index] = symbolPlayer;
     setBoard(newBoard);
 
     const gameWinner = whoWins(newBoard);
     if (gameWinner) {
+      console.log("Hay ganador: ", gameWinner);
       setWinner(gameWinner);
     } else {
       setSymbolPlayer(symbolPlayer === "X" ? "O" : "X");
     }
   };
-   
-    const whoWins = (newBoard) => {
-     
-      const combinations = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-      ];
-      for (let comb of combinations) {
-        const [a, b, c] = comb;
-        if (newBoard[a] && newBoard[b] === newBoard[c]) {
-          return newBoard[a];
-        }
+
+  const whoWins = (newBoard) => {
+    const combinations = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+    ];
+    for (let combination of combinations) {
+      const [a, b, c] = combination;
+      if (newBoard[a] === newBoard[b] && newBoard[a] === newBoard[c]) {
+        console.log("La combinacion ganadora es: ", combination);
+        return newBoard[a];
       }
-      return null;
-    };
-  
+    }
+    return null;
+  };
+
+  const getWinnerName = (winner) => {
+    if (winner == "X") {
+      return player1;
+    } else if (winner == "O") {
+      return player2;
+    }
+    return null;
+  };
+
   return (
     <div className="container bg-primary-subtle" id="main">
       <div className="row text-center">
         <span id="turn">Tic Tac Toe in React.js</span>
-
       </div>
       <div className="row justify-content-center align-items-center">
+        <div id="winnerAlert" className="text-center mt-4">
+          {winner && (
+            <div className="text-center mt-4">
+              <p>
+                The winner is {getWinnerName(winner)} ({winner})
+              </p>
+            </div>
+          )}
+        </div>
         <div className="col-3 text-center">
-          <button type="button" className="btn btn-success" id="replay" onClick={() => {
-            setBoard([null, null, null, null, null, null, null, null, null]);
-            setWinner(null);
-            setSymbolPlayer("X");
-          }}>
+          <button
+            type="button"
+            className="btn btn-success"
+            id="replay"
+            onClick={() => {
+              setBoard([null, null, null, null, null, null, null, null, null]);
+              setWinner(null);
+              setSymbolPlayer("X");
+            }}
+          >
             Play again
           </button>
         </div>
