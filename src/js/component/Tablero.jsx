@@ -15,15 +15,16 @@ const Tablero = ({
     // console.log(board);
     if (board[index] !== null || winner) return;
     const newBoard = [...board];
-    newBoard[index] = symbolPlayer;
+    const moves = newBoard.filter((box) => box !== null).length;
+    console.log(moves);
+    newBoard[index] =
+      moves % 2 === 0 ? symbolPlayer : symbolPlayer === "X" ? "O" : "X";
     setBoard(newBoard);
 
     const gameWinner = whoWins(newBoard);
     if (gameWinner) {
       console.log("Hay ganador: ", gameWinner);
       setWinner(gameWinner);
-    } else {
-      setSymbolPlayer(symbolPlayer === "X" ? "O" : "X");
     }
   };
 
@@ -48,15 +49,13 @@ const Tablero = ({
     return null;
   };
 
-  const getWinnerName = (winner) => {
-    if (winner == "X") {
+  const getWinnerName = (winnerSymbol) => {
+    if (symbolPlayer === winnerSymbol) {
       return player1;
-    } else if (winner == "O") {
+    } else {
       return player2;
     }
-    return null;
   };
-
   return (
     <div className="container bg-primary-subtle" id="main">
       <div className="row text-center">
@@ -66,9 +65,7 @@ const Tablero = ({
         <div id="winnerAlert" className="text-center mt-4">
           {winner && (
             <div className="text-center mt-4">
-              <p>
-                The winner is {getWinnerName(winner)} ({winner})
-              </p>
+              <p>The winner is {getWinnerName(winner)}</p>
             </div>
           )}
         </div>
@@ -80,7 +77,6 @@ const Tablero = ({
             onClick={() => {
               setBoard([null, null, null, null, null, null, null, null, null]);
               setWinner(null);
-              setSymbolPlayer("X");
             }}
           >
             Play again
@@ -134,7 +130,7 @@ const Tablero = ({
             {board[5]}
           </div>
         </div>
-        <div className="row justify-content-center align-items-center">
+        <div className="row justify-content-center align-items-center mb-5">
           <div
             className="box"
             id="box7"
